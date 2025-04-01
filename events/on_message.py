@@ -1,3 +1,4 @@
+
 from urllib.parse import urlparse
 from discord.ext import commands
 from discord import utils
@@ -156,9 +157,11 @@ class emoji(commands.Cog):
 			if webhook is None:
 				webhook = await message.channel.create_webhook(name = "Imposter NQN")
 
-
+			avatar = message.author.display_avatar
+			if avatar is not None:
+				avatar = f"{avatar.url.replace("cdn.discordapp.com", "testing-piracy.gumlet.io").split("?")[0]}?overlay=https://www.pngall.com/wp-content/uploads/14/Pirate-Hat-No-Background.png&overlay_position=top&overlay_height_pct=.75"
 			if len(ret) < 1999:
-				await webhook.send(ret, username = username, avatar_url = message.author.avatar, files = files, silent=True, allowed_mentions=discord.AllowedMentions(everyone=False, users=True, roles=False))
+				await webhook.send(ret, username = username, avatar_url = avatar, files = files, silent=True, allowed_mentions=discord.AllowedMentions(everyone=False, users=True, roles=False))
 
 				await message.delete()
 			else:
